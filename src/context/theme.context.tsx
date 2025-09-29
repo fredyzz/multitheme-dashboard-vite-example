@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import type React from "react";
+import { createContext, useContext, useEffect, useState, useMemo } from "react";
 
 type Theme =
-  | 'default'
-  | 'dark'
-  | 'theme-vercel'
-  | 'theme-boring'
-  | 'theme-colorful'
-  | 'theme-minimal';
+  | "default"
+  | "dark"
+  | "theme-vercel"
+  | "theme-boring"
+  | "theme-colorful"
+  | "theme-minimal";
 
 interface ThemeContextType {
   theme: Theme;
@@ -21,25 +21,31 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('default');
+  const [theme, setTheme] = useState<Theme>("default");
 
-  const themes: Record<Theme, string> = {
-    default: '',
-    dark: 'dark',
-    'theme-vercel': 'theme-vercel',
-    'theme-boring': 'theme-boring',
-    'theme-colorful': 'theme-colorful',
-    'theme-minimal': 'theme-minimal',
-  };
+  const themes = useMemo<Record<Theme, string>>(
+    () => ({
+      default: "",
+      dark: "dark",
+      "theme-vercel": "theme-vercel",
+      "theme-boring": "theme-boring",
+      "theme-colorful": "theme-colorful",
+      "theme-minimal": "theme-minimal",
+    }),
+    []
+  );
 
-  const themeNames: Record<Theme, string> = {
-    default: 'Base theme',
-    dark: 'Dark theme',
-    'theme-vercel': 'Vercel Dark',
-    'theme-boring': 'Boring',
-    'theme-colorful': 'Colorful',
-    'theme-minimal': 'Ultra Minimal',
-  };
+  const themeNames = useMemo<Record<Theme, string>>(
+    () => ({
+      default: "Base theme",
+      dark: "Dark theme",
+      "theme-vercel": "Vercel Dark",
+      "theme-boring": "Boring",
+      "theme-colorful": "Colorful",
+      "theme-minimal": "Ultra Minimal",
+    }),
+    []
+  );
 
   // Apply theme to document
   useEffect(() => {
@@ -56,12 +62,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Save in localStorage
-    localStorage.setItem('app-theme', theme);
+    localStorage.setItem("app-theme", theme);
   }, [theme, themes]);
 
   // Load theme from localStorage and init
   useEffect(() => {
-    const savedTheme = localStorage.getItem('app-theme') as Theme;
+    const savedTheme = localStorage.getItem("app-theme") as Theme;
     if (savedTheme && themes[savedTheme] !== undefined) {
       setTheme(savedTheme);
     }
@@ -74,10 +80,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
 }

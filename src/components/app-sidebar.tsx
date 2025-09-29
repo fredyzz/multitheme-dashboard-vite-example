@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 import {
   BookOpen,
   Bot,
-  Command,
   Frame,
   LifeBuoy,
   Map,
@@ -12,12 +11,12 @@ import {
   Send,
   Settings2,
   SquareTerminal,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { NavMain } from '@/components/nav-main';
-import { NavProjects } from '@/components/nav-projects';
-import { NavSecondary } from '@/components/nav-secondary';
-import { NavUser } from '@/components/nav-user';
+import { NavMain } from "@/components/nav-main";
+import { NavProjects } from "@/components/nav-projects";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -26,118 +25,118 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { Link } from 'react-router';
-import { useTheme } from '@/context/theme.context';
+} from "@/components/ui/sidebar";
+import { Link } from "react-router";
+import { useTheme } from "@/context/theme.context";
 
 const data = {
   user: {
-    name: 'Fredy',
-    email: 'alfredo.zimperz@scrm.lidl',
+    name: "Fredy",
+    email: "alfredo.zimperz@scrm.lidl",
     avatar:
-      'https://cdn.recipes.lidl/images/_Aliases/es-ES/recipe_detail_984x657/Loro-de-pina.jpg',
+      "https://cdn.recipes.lidl/images/_Aliases/es-ES/recipe_detail_984x657/Loro-de-pina.jpg",
   },
   navMain: [
     {
-      title: 'Pages',
-      url: '#',
+      title: "Pages",
+      url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: 'Recipe edit',
-          url: '/recipe-edit',
+          title: "Recipe edit",
+          url: "/recipe-edit",
         },
         {
-          title: 'Table',
-          url: '/table',
+          title: "Table",
+          url: "/table",
         },
       ],
     },
     {
-      title: 'Components',
-      url: '#',
+      title: "Components",
+      url: "#",
       icon: Bot,
       items: [
         {
-          title: 'Showcase',
-          url: '/random-components',
+          title: "Showcase",
+          url: "/random-components",
         },
       ],
     },
     {
-      title: 'Documentation',
-      url: '#',
+      title: "Documentation",
+      url: "#",
       icon: BookOpen,
       items: [
         {
-          title: 'Introduction',
-          url: '#',
+          title: "Introduction",
+          url: "#",
         },
         {
-          title: 'Get Started',
-          url: '#',
+          title: "Get Started",
+          url: "#",
         },
         {
-          title: 'Tutorials',
-          url: '#',
+          title: "Tutorials",
+          url: "#",
         },
         {
-          title: 'Changelog',
-          url: '#',
+          title: "Changelog",
+          url: "#",
         },
       ],
     },
     {
-      title: 'Settings',
-      url: '#',
+      title: "Settings",
+      url: "#",
       icon: Settings2,
       items: [
         {
-          title: 'General',
-          url: '#',
+          title: "General",
+          url: "#",
         },
         {
-          title: 'Team',
-          url: '#',
+          title: "Team",
+          url: "#",
         },
         {
-          title: 'Billing',
-          url: '#',
+          title: "Billing",
+          url: "#",
         },
         {
-          title: 'Limits',
-          url: '#',
+          title: "Limits",
+          url: "#",
         },
       ],
     },
   ],
   navSecondary: [
     {
-      title: 'Support',
-      url: '#',
+      title: "Support",
+      url: "#",
       icon: LifeBuoy,
     },
     {
-      title: 'Feedback',
-      url: '#',
+      title: "Feedback",
+      url: "#",
       icon: Send,
     },
   ],
   projects: [
     {
-      name: 'Design Engineering',
-      url: '#',
+      name: "Design Engineering",
+      url: "#",
       icon: Frame,
     },
     {
-      name: 'Sales & Marketing',
-      url: '#',
+      name: "Sales & Marketing",
+      url: "#",
       icon: PieChart,
     },
     {
-      name: 'Travel',
-      url: '#',
+      name: "Travel",
+      url: "#",
       icon: Map,
     },
   ],
@@ -146,7 +145,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { theme } = useTheme();
 
-  const insetProp = theme === 'theme-boring' ? 'sidebar' : 'inset';
+  const insetProp = theme === "theme-boring" ? "sidebar" : "inset";
 
   return (
     <Sidebar variant={insetProp} {...props}>

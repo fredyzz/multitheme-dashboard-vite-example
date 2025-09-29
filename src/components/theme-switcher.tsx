@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Select,
@@ -6,8 +6,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import {
   Palette,
   Monitor,
@@ -16,26 +16,34 @@ import {
   Box,
   Sparkles,
   Minus,
-} from 'lucide-react';
-import { useTheme } from '../context/theme.context.tsx';
+} from "lucide-react";
+import { useTheme } from "../context/theme.context.tsx";
+
+type Theme =
+  | "default"
+  | "dark"
+  | "theme-vercel"
+  | "theme-boring"
+  | "theme-colorful"
+  | "theme-minimal";
 
 export function ThemeSwitcher({
-  variant = 'select',
+  variant = "select",
 }: {
-  variant?: 'select' | 'buttons' | 'compact';
+  variant?: "select" | "buttons" | "compact";
 }) {
   const { theme, setTheme, themeNames } = useTheme();
 
   const themeIcons = {
     default: <Monitor className="h-4 w-4" />,
     dark: <Moon className="h-4 w-4" />,
-    'theme-vercel': <Sun className="h-4 w-4" />,
-    'theme-boring': <Box className="h-4 w-4" />,
-    'theme-colorful': <Sparkles className="h-4 w-4" />,
-    'theme-minimal': <Minus className="h-4 w-4" />,
+    "theme-vercel": <Sun className="h-4 w-4" />,
+    "theme-boring": <Box className="h-4 w-4" />,
+    "theme-colorful": <Sparkles className="h-4 w-4" />,
+    "theme-minimal": <Minus className="h-4 w-4" />,
   };
 
-  if (variant === 'compact') {
+  if (variant === "compact") {
     return (
       <Button
         variant="ghost"
@@ -56,15 +64,15 @@ export function ThemeSwitcher({
     );
   }
 
-  if (variant === 'buttons') {
+  if (variant === "buttons") {
     return (
       <div className="flex flex-wrap gap-2">
         {Object.entries(themeNames).map(([key, name]) => (
           <Button
             key={key}
-            variant={theme === key ? 'default' : 'outline'}
+            variant={theme === key ? "default" : "outline"}
             size="sm"
-            onClick={() => setTheme(key as any)}
+            onClick={() => setTheme(key as Theme)}
             className="gap-2"
           >
             {themeIcons[key as keyof typeof themeIcons]}
@@ -76,7 +84,7 @@ export function ThemeSwitcher({
   }
 
   return (
-    <Select value={theme} onValueChange={(value) => setTheme(value as any)}>
+    <Select value={theme} onValueChange={(value) => setTheme(value as Theme)}>
       <SelectTrigger className="w-[180px]">
         <div className="flex items-center gap-2">
           <Palette className="h-4 w-4" />

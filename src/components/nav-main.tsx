@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { ChevronRight, type LucideIcon } from 'lucide-react';
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+} from "@/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -17,8 +17,23 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from '@/components/ui/sidebar';
-import { Link, useMatch } from 'react-router';
+} from "@/components/ui/sidebar";
+import { Link, useMatch } from "react-router";
+
+// Helper component to use useMatch hook properly
+function SubMenuItem({ subItem }: { subItem: { title: string; url: string } }) {
+  const match = useMatch(subItem.url);
+
+  return (
+    <SidebarMenuSubItem>
+      <SidebarMenuSubButton asChild isActive={Boolean(match)}>
+        <Link to={subItem.url}>
+          <span>{subItem.title}</span>
+        </Link>
+      </SidebarMenuSubButton>
+    </SidebarMenuSubItem>
+  );
+}
 
 export function NavMain({
   items,
@@ -58,16 +73,7 @@ export function NavMain({
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       {item.items?.map((subItem) => (
-                        <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton
-                            asChild
-                            isActive={Boolean(useMatch(subItem.url))}
-                          >
-                            <Link to={subItem.url}>
-                              <span>{subItem.title}</span>
-                            </Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
+                        <SubMenuItem key={subItem.title} subItem={subItem} />
                       ))}
                     </SidebarMenuSub>
                   </CollapsibleContent>
