@@ -1,5 +1,16 @@
 import { useLayoutEffect, useState } from 'react';
-import debounce from 'lodash/debounce';
+
+// Simple debounce function to avoid lodash dependency
+const debounce = <T extends unknown[]>(
+  func: (...args: T) => void, 
+  delay: number
+) => {
+  let timeoutId: NodeJS.Timeout;
+  return (...args: T) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
 
 const useIsMobile = (): boolean => {
   const [isMobile, setIsMobile] = useState(false);
@@ -8,9 +19,14 @@ const useIsMobile = (): boolean => {
     const updateSize = (): void => {
       setIsMobile(window.innerWidth < 768);
     };
-    window.addEventListener('resize', debounce(updateSize, 250));
-    // updateSize();
-    return (): void => window.removeEventListener('resize', updateSize);
+    
+    const debouncedUpdateSize = debounce(updateSize, 250);
+    window.addEventListener('resize', debouncedUpdateSize);
+    
+    // Initial check
+    updateSize();
+    
+    return (): void => window.removeEventListener('resize', debouncedUpdateSize);
   }, []);
 
   return isMobile;
