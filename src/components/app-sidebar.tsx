@@ -32,9 +32,9 @@ import { useTheme } from "@/context/theme.context";
 const data = {
   user: {
     name: "Fredy",
-    email: "alfredo.zimperz@scrm.lidl",
+    email: "a@a.com",
     avatar:
-      "https://cdn.recipes.lidl/images/_Aliases/es-ES/recipe_detail_984x657/Loro-de-pina.jpg",
+      "https://www.flaticon.com/free-icon/avatar_6858504",
   },
   navMain: [
     {
